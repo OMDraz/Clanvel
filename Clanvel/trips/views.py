@@ -1,5 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render
-from django.http import HttpResponse 
 
 def index(request):
-    return HttpResponse("Hello, stupid. You're a poopy head")
+    context = {}
+    return render(request, 'index.html', context)
