@@ -1,5 +1,6 @@
-def func(x):
-    return x + 1 
+import pytest 
 
-def test_answer():
-    assert func(3) == 4
+
+def test_home_page_returns_correct_html(self):
+    request = HttpRequest()
+    response = home_page(requst)
