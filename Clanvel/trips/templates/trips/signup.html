@@ -3,7 +3,7 @@
 {% block content %}
     <form action = "" method = "post"> 
         {% csrf_token %} 
-        {{ form|linebreaks }} 
+        {{ form | linebreaks }} 
         <input type="submit" value=Submit"> 
     </form> 
 {% endblock %} 
