@@ -36,7 +36,6 @@ class RegisterForm(forms.Form):
         ('Excelsior','Excelsior'),
         ('Fillmore','Fillmore'),
         ('Financial District','Financial District'),
-        ('Financial District','Financial District'),
         ('Fishermans Wharf','Fishermans Wharf'),
         ('Forest Hill','Forest Hill'),
         ('Forest Knolls','Forest Knolls'),

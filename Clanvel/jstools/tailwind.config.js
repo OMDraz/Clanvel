@@ -11,8 +11,12 @@ module.exports = {
       ]
   },
   theme: {
-      extend: {},
-  },
+      extend: {
+        backgroundImage: theme => ({
+            'hero-pattern': "url('static/img/rare-fest_t20_7lJolN.jpg')",
+           })
+      },
   variants: {},
   plugins: [],
+    }
 }
