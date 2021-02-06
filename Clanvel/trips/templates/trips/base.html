@@ -1,20 +1,22 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Clanvel - A new way to travel</title>
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
-  <meta name="author" content="" />
-  <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />
-  <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
-</head>
-<body>
-  <a href="{% url "signup" %}">Sign-Up</a>
-</body>
-
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Clanvel{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <h1>Find your clan and travel</h1>
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+      {% endif %}
+      <hr>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+  </body>
 </html>
