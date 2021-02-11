@@ -2,8 +2,8 @@
 
 {% block content %}
   <h2>Sign up</h2>
-  <div style="text-align: center;">
-        <div style="width: 500px; margin: 0 auto; background: #fff; color: #000;">
+  <div style="text-align: left;">
+        <div style="width: 300px; margin: auto; background: #fff; color: #000;">
             <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
