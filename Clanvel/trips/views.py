@@ -8,14 +8,16 @@ def index(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
+        f = SignUpForm(request.POST, instance = request.user)
+        if f.is_valid():
+            f.save()
     else:
-        form = SignUpForm()
+        f = SignUpForm(request.POST , instance = request.user)
+
+    print "UserDetails objects: ", (UserProfile.objects.all()) 
     return render(request, 'signup.html', {'form': form})
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, 'Logged out successfully!')
+    return redirect("index")
