@@ -43,10 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Our apps
     'tailwind',
-    'trips',
+    'accounts',
     'theme',
 ]
+
+AUTH_USER_MODEL = 'accounts.User' #Changes the built-in user to ours 
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,9 +69,7 @@ ROOT_URLCONF = 'clanvel.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),
-                 os.path.join(BASE_DIR, 'trips', 'templates', 'trips'),
-                 ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
