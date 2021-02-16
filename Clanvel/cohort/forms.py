@@ -6,20 +6,18 @@ from . import models
 class SearchForm(forms.Form):
     city = forms.CharField(initial="Anywhere")
     country = CountryField(default="KR").formfield()
-    size = forms.ModelChoiceField(
-        required=False, empty_label="Any kind", queryset=Cohort.size.objects.all()
-    )
+    size = forms.IntegerField(required=False)
     price = forms.IntegerField(required=False)
     guests = forms.IntegerField(required=False)
     instant_book = forms.BooleanField(required=False)
     cohortLocations = forms.ModelMultipleChoiceField(
         required=False,
-        queryset=models.cohortLocations.objects.all(),
+        queryset=models.CohortLocations.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
     cohortRules = forms.ModelMultipleChoiceField(
         required=False,
-        queryset=models.cohortRules.objects.all(),
+        queryset=models.CohortRules.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
 

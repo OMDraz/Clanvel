@@ -64,9 +64,7 @@ class Cohort(core_models.TimeStampedModel):
     cohort_guide = models.ForeignKey(
         "accounts.User", related_name="cohort", on_delete=models.CASCADE 
     )
-    cohortName = models.ForeignKey(
-        "CohortName", related_name="cohort", on_delete=models.SET_NULL, null=True
-    )
+    cohortName = models.ManyToManyField(CohortName, related_name="cohort", blank=True)
     cohortLocations = models.ManyToManyField(CohortLocations, related_name="cohort", blank=True)
     cohortRules = models.ManyToManyField(CohortRules, related_name="cohort", blank=True)
     
