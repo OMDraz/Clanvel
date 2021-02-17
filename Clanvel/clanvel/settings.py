@@ -32,8 +32,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-TAILWIND_APP_NAME = 'theme'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,16 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Our apps
-    'tailwind',
     'accounts',
-    'theme',
     'cohort',
     'django_countries',
 ]
 
 AUTH_USER_MODEL = 'accounts.User' #Changes the built-in user to ours 
-
-
 ROOT_URLCONF = 'clanvel.urls'
 
 MIDDLEWARE = [
