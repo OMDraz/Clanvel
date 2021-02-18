@@ -24,7 +24,7 @@ def guest_register_view(request):
             return redirect(redirect_path)
         else:
             return redirect('/register/')
-    return redirect('guest/register/')
+    return redirect('templates/register/')
 
 class LoginView(FormView):
     form_class = LoginForm 
@@ -53,7 +53,7 @@ class LoginView(FormView):
 
 class RegisterView(CreateView):
     form_class = RegisterForm
-    template_name = 'accounts/register.html'
+    template_name = '/register.html'
     success_url = '/login/'
 
 def LogoutView(request):
