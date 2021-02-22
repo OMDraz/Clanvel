@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate, login, get_user_model, logout
+from django.urls import reverse_lazy 
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, FormView
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
@@ -7,6 +9,7 @@ from django.contrib import messages
 
 from .forms import LoginForm, RegisterForm, GuestForm
 from .models import GuestEmail
+
 
 def guest_register_view(request):
     form = GuestForm(request.POST or None)
@@ -24,12 +27,18 @@ def guest_register_view(request):
             return redirect(redirect_path)
         else:
             return redirect('/register/')
-    return redirect('templates/register/')
+    return redirect('registration/guest_register.html')
+
+class SignUpView(SuccessMessageMixin, CreateView):
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy('login')
+    form_class = RegisterForm 
+    success_message = "Your profile was created successfully"
 
 class LoginView(FormView):
     form_class = LoginForm 
     success_url = '/'
-    template_name = 'accounts/login.html'
+    template_name = 'registration/login.html'
 
     def form_valid(self, form):
         request = self.request 
@@ -51,10 +60,6 @@ class LoginView(FormView):
                 return redirect('/')
         return super(LoginView, self).form_invalid(form)
 
-class RegisterView(CreateView):
-    form_class = RegisterForm
-    template_name = '/register.html'
-    success_url = '/login/'
 
 def LogoutView(request):
     logout(request)
