@@ -23,6 +23,12 @@
         .form-multiselect {
             background-color: #DBEAFE;
         }
+
+        br {
+          display: block;
+          margin: 10px 0;
+        }
+        
     </style>
 
 </head>
@@ -33,7 +39,7 @@
             <div class="pl-4 md:pl-0">
                 <a class="flex items-center text-bg-blue-100  text-base xl:text-xl no-underline hover:no-underline font-extrabold font-sans" href="#">
                     <svg class="fill-current h-6 inline-block text-bg-blue-100  mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M16 2h4v15a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V0h16v2zm0 2v13a1 1 0 0 0 1 1 1 1 0 0 0 1-1V4h-2zM2 2v15a1 1 0 0 0 1 1h11.17a2.98 2.98 0 0 1-.17-1V2H2zm2 8h8v2H4v-2zm0 4h8v2H4v-2zM4 4h8v4H4V4z" />
+                        <path d="M16 2h4v15a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V0h16v2zm0 2v13a1 1 0 0 0 1 1 1 1 0 0 0 1-1V4h-2zM2 2v15a1 1 0 0 0 1 1h11.17a2.98 2.98 0 0 1-.17-1V2H2zm2 8h8v2H4v-2zm0 4h8v2H4v-2zM4 4h8v4H4V4z"/>
                     </svg> Clanvel Registration Form
                 </a>
             </div>
@@ -92,14 +98,6 @@
         </div>
         <!--Section container-->
         <section class="w-full lg:w-4/5">
-            <!--Title-->
-            <h1
-                class="flex items-center font-sans font-bold break-normal text-gray-700 px-2 text-xl mt-12 lg:mt-0 md:text-2xl">
-                Multi Section Form with Scrollspy
-            </h1>
-            <!--divider-->
-            <hr class="bg-gray-300 my-12">
-            <!--Title-->
             <h2 id='section1' class="font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl">Introcuction</h2>
             <!--Card-->
             <div class="p-8 mt-6 lg:mt-0 leading-normal rounded shadow bg-white">
@@ -114,14 +112,34 @@
 
             <!--Title-->
             <h2 class="font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl">Profile Username and Password</h2>
-
-            <!--Card-->
             <div id='section2' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-                <form action="/login/" method="post">
+                <form action="/login/" method="POST">
+                    <a style="margin-bottom: 10px;" class="btn btn-outline-primary float-right" href="/" role="button">Back to Home</a>
                     {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Submit">
-                </form>                
+                 <div class="form-group">
+                    <label for="first_name"><b>First Name : </b></label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="last_name"><b>Last Name : </b></label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="email"><b>Email : </b></label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="password"><b>Password : </b></label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <br>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Submit Form
+                    </button>
+                </form>             
             </div>
             <!--/Card-->
     </div>
