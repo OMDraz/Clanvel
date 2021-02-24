@@ -29,11 +29,16 @@ def guest_register_view(request):
             return redirect('/register/')
     return redirect('registration/guest_register.html')
 
-class SignUpView(SuccessMessageMixin, CreateView):
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')
-    form_class = RegisterForm 
-    success_message = "Your profile was created successfully"
+class SignUpView(request):
+    if response.method == "POST":
+	    form = RegisterForm(response.POST)
+        if form.is_valid():
+            form.save()
+            
+        return redirect("/home")
+    else:
+	    form = RegisterForm()
+    return render(response, "register/register.html", {"form":form})
 
 class LoginView(FormView):
     form_class = LoginForm 
