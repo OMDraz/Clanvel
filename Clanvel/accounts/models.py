@@ -54,7 +54,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    # email and password are required by default 
     REQUIRED_FIELDS = ['first_name','last_name']
 
     objects = UserManager() 
