@@ -53,9 +53,9 @@ class UserAdminChangeForm(forms.ModelForm):
 class RegisterForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    first_name = forms.CharField(label='First Name')
-    last_name = forms.CharField(label='Last Name')
-    email = forms.EmailField(label='Email')
+    first_name = forms.CharField(label='First Name', required=True, help_text='First Name')
+    last_name = forms.CharField(label='Last Name', required=True, help_text='Last Name')
+    email = forms.EmailField(label='Email', required=True, help_text='Email')
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 

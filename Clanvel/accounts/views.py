@@ -29,16 +29,20 @@ def guest_register_view(request):
             return redirect('/register/')
     return redirect('registration/guest_register.html')
 
-class SignUpView(request):
-    if response.method == "POST":
-	    form = RegisterForm(response.POST)
+class SignUpView(FormView):
+    template_name = 'registration/login.html'
+    form_class = RegisterForm 
+    success_url = '/'
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
         if form.is_valid():
-            form.save()
-            
-        return redirect("/home")
-    else:
-	    form = RegisterForm()
-    return render(response, "register/register.html", {"form":form})
+            return HttpResponseRedirect('/success/')
+        return render(request, self.template_name, {'form': form})
 
 class LoginView(FormView):
     form_class = LoginForm 
