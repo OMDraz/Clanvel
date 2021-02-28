@@ -80,11 +80,6 @@ class RegisterForm(forms.ModelForm):
             user.save()
         return user
 
-class GuestForm(forms.Form):
-    first_name = forms.CharField(label='First Name')
-    last_name = forms.CharField(label='Last Name')
-    email    = forms.EmailField(label='Email')
-
 
 class LoginForm(forms.Form):
     username = forms.EmailField(label='Email')

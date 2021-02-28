@@ -34,132 +34,118 @@
 </head>
 
 <body class="bg-gray-100 text-bg-blue-500 tracking-wider leading-normal">
-    <nav id="header" class="bg-white fixed w-full z-10 top-0 shadow">
-        <div class="w-full container mx-auto flex flex-wrap items-center justify-between my-4">
-            <div class="pl-4 md:pl-0">
-                <a class="flex items-center text-bg-blue-100  text-base xl:text-xl no-underline hover:no-underline font-extrabold font-sans" href="#">
-                    <svg class="fill-current h-6 inline-block text-bg-blue-100  mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M16 2h4v15a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V0h16v2zm0 2v13a1 1 0 0 0 1 1 1 1 0 0 0 1-1V4h-2zM2 2v15a1 1 0 0 0 1 1h11.17a2.98 2.98 0 0 1-.17-1V2H2zm2 8h8v2H4v-2zm0 4h8v2H4v-2zM4 4h8v4H4V4z"/>
-                    </svg> Clanvel Registration Form
-                </a>
-            </div>
-            <div class="pr-0 flex justify-end">
-                <div class="flex relative inline-block float-right">
-                    <div class="relative text-sm">
-                        <button id="userButton"
-                            class="flex items-center mr-3 shadow bg-blue-500 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white text-sm md:text-base font-bold py-2 px-4 rounded">Menu
-                            <svg class="pl-2 h-2 fill-current text-white" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                                <g>
-                                    <path
-                                        d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" />
-                                </g>
-                            </svg>
-                        </button>
-                        <div id="userMenu"
-                            class="bg-white rounded shadow-md mt-2 mr-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30 invisible">
-                            <ul class="list-reset">
-                                <li><a href="#" class="px-4 py-2 block hover:bg-gray-400 no-underline hover:no-underline">My account</a></li>
-                                <li><a href="#" class="px-4 py-2 block hover:bg-gray-400 no-underline hover:no-underline">Notifications</a></li>
-                                <li><hr class="border-t mx-2 border-gray-400"></li>
-                                <li><a href="#" class="px-4 py-2 block text-yellow-600 font-bold hover:bg-yellow-600 hover:text-white no-underline hover:no-underline">Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+      <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+        <div class="p-4 flex flex-row items-center justify-between">
+          <a href="/" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Clanvel</a>
+          <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+            <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+              <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+              <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+          </button>
         </div>
-    </nav>
-    <!--Container-->
-    <div class="container w-full flex flex-wrap mx-auto px-2 pt-8 lg:pt-16 mt-16">
-        <div class="w-full lg:w-1/5 px-6 text-xl text-gray-800 leading-normal">
-            <p class="text-base font-bold py-2 lg:pb-6 text-gray-700">Menu</p>
-            <div class="block lg:hidden sticky inset-0">
-                <button id="menu-toggle"
-                    class="flex w-full justify-end px-3 py-3 bg-white lg:bg-transparent border rounded border-gray-600 hover:border-yellow-600 appearance-none focus:outline-none">
-                    <svg class="fill-current h-3 float-right" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                </button>
+        <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+          <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Home</a>
+          <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">About</a>
+          <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Contact</a>
+          <div @click.away="open = false" class="relative" x-data="{ open: false }">
+            <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+              <span>Profile</span>
+              <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+              <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Account</a>
+                <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Membership Settings</a>
+                <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Work</a>
+              </div>
             </div>
-            <div class="w-full sticky inset-0 hidden max-h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 my-2 lg:my-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20"
-                style="top:6em;" id="menu-content">
-                <ul class="list-reset py-2 md:py-0">
-                    <li
-                        class="py-1 md:my-2 hover:bg-yellow-100 lg:hover:bg-transparent border-l-4 border-transparent font-bold border-yellow-600">
-                        <a href='#section1'
-                            class="block pl-4 align-middle text-gray-700 no-underline hover:text-yellow-600">
-                            <span class="pb-1 md:pb-0 text-sm">Introduction</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--Section container-->
-        <section class="w-full lg:w-4/5">
-            <h2 id='section1' class="font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl">Introduction</h2>
-            <!--Card-->
-            <div class="p-8 mt-6 lg:mt-0 leading-normal rounded shadow bg-white">
-                <li>Welcome to <a class="underline text-yellow-600"
-                        href="http://127.0.0.1:8000/" target="_blank">Clanvel, you can sign up here!</a>
-                </li>
-            </div>
-            <!--/Card-->
-
-            <!--divider-->
-            <hr class="bg-gray-300 my-12">
-
-            <!--Title-->
-            <h2 class="font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl">Profile Username and Password</h2>
-            <div id='section2' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-                <form action="/register/" method="POST">
-                    <a style="margin-bottom: 10px;" class="btn btn-outline-primary float-right" href="/" role="button">Back to Home</a>
-                    {% csrf_token %}
-                 <div class="form-group">
-                    <label for="first_name"><b>First Name : </b></label>
-                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="last_name"><b>Last Name : </b></label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="email"><b>Email : </b></label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="password"><b>Password : </b></label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                </div>
-                <br>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Submit Form
-                    </button>
-                </form>             
-            </div>
-            <!--/Card-->
+          </div>    
+        </nav>
+      </div>
     </div>
-    <!--/container-->
-
-    <!-- Toggle dropdown list -->
-    <script>
+      <!--Container-->
+      <div class="container w-full flex flex-wrap py-10">
+  
+          <!--Section container-->
+          <div class="min-h-screen bg-gray-100 mx-auto">
+            <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+              <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+                <div class="max-w-md mx-auto">
+                  <div class="flex items-center space-x-5">
+                    <div class="h-14 w-14 bg-purple-400 rounded-full flex flex-shrink-0 justify-center items-center text-grey-500 text-2xl font-mono">C</div>
+                    <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+                      <h2 class="leading-relaxed">Sign-up Form</h2>
+                      <p class="text-sm text-gray-500 font-normal leading-relaxed">Register for Clanvel</p>
+                    </div>
+                  </div>
+                  <div class="divide-y divide-gray-200">
+                    <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                      <form method="POST" action="{% url 'register' %}">
+                        <div class="flex flex-col">
+                          {{ form.first_name.label_tag }}
+                          {% csrf_token %}
+                          <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="First Name" value="{{ first_name }}">
+                        </div>
+                        <br>
+                        <div class="flex flex-col">
+                            {{ form.last_name.label_tag }}
+                            {% csrf_token %}
+                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Last Name" value="{{ last_name }}">
+                          </div>
+                          <br>
+                          <div class="flex flex-col">
+                            {{ form.email.label_tag }}
+                            {% csrf_token %}
+                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Email" value="{{ email }}">
+                          </div>
+                          <br>
+                          <div class="flex flex-col">
+                            {{ form.password1.label_tag }}
+                            {% csrf_token %}
+                            <input type="password" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Password" value="{{ password }}">
+                          </div>
+                          <br>
+                          <div class="flex flex-col">
+                            {{ form.password2.label_tag }}
+                            {% csrf_token %}
+                            <input type="password" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Enter Password Again" value="{{ password }}">
+                          </div>
+                          <br>
+                        <div class="pt-4 flex items-center space-x-4">
+                          <button class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none" type="submit">Sign-Up</button>
+                        </div>
+                      </form>
+                        <br>
+                        <p><a href="/login">Already have an account? Log-in here</a></p>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  
+      
+      <!-- jQuery -->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script>
         /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
-
+  
         var userMenuDiv = document.getElementById("userMenu");
         var userMenu = document.getElementById("userButton");
-
+  
         var helpMenuDiv = document.getElementById("menu-content");
         var helpMenu = document.getElementById("menu-toggle");
-
+  
         document.onclick = check;
-
+  
         function check(e) {
             var target = (e && e.target) || (event && event.srcElement);
-
+  
             //User Menu
             if (!checkParent(target, userMenuDiv)) {
                 // click NOT on the menu
@@ -173,7 +159,7 @@
                     userMenuDiv.classList.add("invisible");
                 }
             }
-
+  
             //Help Menu
             if (!checkParent(target, helpMenuDiv)) {
                 // click NOT on the menu
@@ -187,9 +173,9 @@
                     helpMenuDiv.classList.add("hidden");
                 }
             }
-
+  
         }
-
+  
         function checkParent(t, elm) {
             while (t.parentNode) {
                 if (t == elm) { return true; }
@@ -197,67 +183,10 @@
             }
             return false;
         }
-
+  
     </script>
-
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-    <!-- Scroll Spy -->
-    <script>
-        /* http://jsfiddle.net/LwLBx/ */
-
-        // Cache selectors
-        var lastId,
-            topMenu = $("#menu-content"),
-            topMenuHeight = topMenu.outerHeight() + 175,
-            // All list items
-            menuItems = topMenu.find("a"),
-            // Anchors corresponding to menu items
-            scrollItems = menuItems.map(function () {
-                var item = $($(this).attr("href"));
-                if (item.length) { return item; }
-            });
-
-        // Bind click handler to menu items
-        // so we can get a fancy scroll animation
-        menuItems.click(function (e) {
-            var href = $(this).attr("href"),
-                offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
-            $('html, body').stop().animate({
-                scrollTop: offsetTop
-            }, 300);
-            if (!helpMenuDiv.classList.contains("hidden")) {
-                helpMenuDiv.classList.add("hidden");
-            }
-            e.preventDefault();
-        });
-
-        // Bind to scroll
-        $(window).scroll(function () {
-            // Get container scroll position
-            var fromTop = $(this).scrollTop() + topMenuHeight;
-
-            // Get id of current scroll item
-            var cur = scrollItems.map(function () {
-                if ($(this).offset().top < fromTop)
-                    return this;
-            });
-            // Get the id of the current element
-            cur = cur[cur.length - 1];
-            var id = cur && cur.length ? cur[0].id : "";
-
-            if (lastId !== id) {
-                lastId = id;
-                // Set/remove active class
-                menuItems
-                    .parent().removeClass("font-bold border-yellow-600")
-                    .end().filter("[href='#" + id + "']").parent().addClass("font-bold border-yellow-600");
-            }
-        });
-
-    </script>
-
-</body>
+      
+  
+  </body>
 
 </html>

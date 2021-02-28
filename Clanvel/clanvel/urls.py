@@ -17,12 +17,11 @@ from django.contrib import admin
 from django.urls import path, include 
 from django.views.generic.base import TemplateView
 
-from accounts.views import LoginView, SignUpView, guest_register_view,LogoutView
+from accounts.views import LoginView, SignUpView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('register/guest/', guest_register_view, name='guest_register'),
-    path('login/', LoginView.as_view(), name='login'),
+    path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('register/', SignUpView.as_view(template_name='registration/register.html'), name='register'),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path("logout", LogoutView, name= "logout"),

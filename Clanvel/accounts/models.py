@@ -3,7 +3,6 @@ from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin 
 )
 
-
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None, is_staff = False, is_admin = False, is_active=True):
         if not email:
@@ -40,10 +39,6 @@ class UserManager(BaseUserManager):
         user.admin = True 
         user.save()
         return user
-
-
-
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, max_length=255)
@@ -84,12 +79,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property 
     def is_active(self):
         return self.active 
-
-class GuestEmail(models.Model):
-    email       = models.EmailField()
-    active      = models.BooleanField(default=True)
-    update      = models.DateTimeField(auto_now=True)
-    timestamp   = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.email

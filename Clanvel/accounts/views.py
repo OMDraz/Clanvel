@@ -6,33 +6,16 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.utils.http import is_safe_url
 from django.contrib import messages 
-
-from .forms import LoginForm, RegisterForm, GuestForm
-from .models import GuestEmail
+from django.contrib.auth.views import LoginView
 
 
-def guest_register_view(request):
-    form = GuestForm(request.POST or None)
-    context = {
-        'form': form 
-    }
-    next_ = request.GET.get('next')
-    next_post = request.POST.get('next')
-    redirect_path = next_ or next_post or None 
-    if form.is_valid():
-        email = form.cleaned_data.get('email')
-        new_guest_email = GuestEmail.objects.create(email=email)
-        request.session['guest_email_id'] = new_guest_email.id 
-        if is_safe_url(redirect_path, request.get_host()):
-            return redirect(redirect_path)
-        else:
-            return redirect('/register/')
-    return redirect('registration/guest_register.html')
+from .forms import LoginForm, RegisterForm
+
 
 class SignUpView(FormView):
     template_name = 'registration/login.html'
     form_class = RegisterForm 
-    success_url = '/'
+    success_url = reverse_lazy("home")
 
     def get(self, request):
         form = self.form_class(initial=self.initial)
@@ -44,34 +27,36 @@ class SignUpView(FormView):
             return HttpResponseRedirect('/success/')
         return render(request, self.template_name, {'form': form})
 
+    def form_valid(self, form):
+        form.save()
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        user = authenticate(self.request, username=email, password=password)
+        if user is not None:
+            login(self.request, user)
+            user.verify_email()
+        return super().form_valid(form)
+
 class LoginView(FormView):
-    form_class = LoginForm 
-    success_url = '/'
+    """
+    Validates the Login of the account
+    """
     template_name = 'registration/login.html'
+    form_class = LoginForm
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
-        request = self.request 
-        next_ = request.GET.get('next')
-        next_post = request.POST.get('next')
-        redirect_path = next_ or next_post or None 
-        email = form.cleaned_data.get('email')
-        password = form.cleaned_data.get('password')
-        user = authenticate(request, username=email, password=password)
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        user = authenticate(self.request, username=email, password=password)
         if user is not None:
-            login(request, user)
-            try:
-                del request.session['guest_email_id']
-            except:
-                pass 
-            if is_safe_url(redirect_path, request.get_host()):
-                return redirect(redirect_path)
-            else:
-                return redirect('/')
-        return super(LoginView, self).form_invalid(form)
-
+            login(self.request, user)
+        return super().form_valid(form)
 
 def LogoutView(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect('/')
+
+
 
