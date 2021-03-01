@@ -8,34 +8,31 @@ from django.utils.http import is_safe_url
 from django.contrib import messages 
 from django.contrib.auth.views import LoginView
 
-
+from .models import User 
 from .forms import LoginForm, RegisterForm
 
 
-class SignUpView(FormView):
-    template_name = 'registration/login.html'
-    form_class = RegisterForm 
-    success_url = reverse_lazy("home")
+class SignUpView(CreateView):
+    model = User 
 
-    def get(self, request):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('/success/')
-        return render(request, self.template_name, {'form': form})
-
+    
     def form_valid(self, form):
-        form.save()
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=email, password=password)
-        if user is not None:
-            login(self.request, user)
-            user.verify_email()
-        return super().form_valid(form)
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        instance.post_date = datetime.now()
+        instance.save()
+        return redirect(self.get_success_url())
+    def get(self, request, *args, **kwargs):
+        context = {'form': RegisterForm()}
+        return render(request, 'registration/register.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            User = form.save()
+            User.save()
+            return HttpResponseRedirect(reverse_lazy('home'))
+        return render(request, 'registration/register.html', {'form': form})
 
 class LoginView(FormView):
     """
