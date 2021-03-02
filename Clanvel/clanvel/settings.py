@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     #Our apps
     'accounts',
     'cohort',
-    'django_countries',
 ]
 
 AUTH_USER_MODEL = 'accounts.User' #Changes the built-in user to ours 
