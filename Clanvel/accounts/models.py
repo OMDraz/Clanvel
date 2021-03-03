@@ -2,9 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils import timezone
 
-
 class UserManager(UserManager):
-
     def _create_user(self, email, password, first_name, last_name, **extra_fields):
         """
         Creates and saves a User with the given username, email and password.
