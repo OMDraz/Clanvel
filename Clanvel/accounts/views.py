@@ -1,37 +1,52 @@
-from django.contrib.auth import authenticate, login, get_user_model, logout
-from django.urls import reverse_lazy 
-from django.views.generic import CreateView, FormView
-from django.shortcuts import redirect
-from django.contrib import messages 
+from django.contrib.auth import authenticate, login, logout 
+from django.shortcuts import render, redirect  
 
+#Create your views here 
 from .forms import LoginForm, RegisterForm
 
+#Finished part 1: https://www.youtube.com/watch?v=x8yxM7rCvEc
 
-class SignUpView(CreateView):
-    form_class = RegisterForm
-    template_name = 'accounts/register.html'
-    success_url = '/login/'
 
-class LoginView(FormView):
-    """
-    Validates the Login of the account
-    """
-    template_name = 'registration/login.html'
-    form_class = LoginForm
-    success_url = reverse_lazy('home')
-
-    def form_valid(self, form):
+def register_view(request):
+    form = RegisterForm(request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
         email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password1")
+        password2 = form.cleaned_data.get("password2")
+        first_name = form.cleaned_data.get("first_name")
+        last_name = form.cleaned_data.get("last_name")
+        try: 
+            user = User.objects.create_user(username, email, password)
+        except:
+            user = None
+        if user != None:
+            login(request, user) 
+            return redirect('/')
+    return render(request, "registration/register.html", {"form": form})
+
+
+def login_view(request):
+    form = LoginForm(request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=email, password=password)
-        if user is not None:
-            login(self.request, user)
-        return super().form_valid(form)
+        user = authenticate(
+                request, 
+                username=username, 
+                password=password
+            )
+        if user == None:
+            # attempt = request.session.get("attempt") or 0
+            # request.session['attempt'] = attempt + 1 
+            # return redirect('/invalid-password')
+            request.session['invalid_user'] = 1 
+            return render(request, "registration/register.hml",{ "form": form, "invalid_user":True})
+        login(request, user) 
+        return redirect('/')
+    return render(request, "registration/login.html", {"form": form})
 
-def LogoutView(request):
+
+def logout_view(request):
     logout(request)
-    messages.info(request, "You have successfully logged out.")
-    return redirect('/')
-
-
-
+    return redirect('/login')
